@@ -6,12 +6,34 @@ import { IMonthlyPlanBody } from './interfaces/MonthlyPlanBody.interface';
 export class FinanceService {
   constructor(private readonly prismaService: PrismaService) {}
 
+  async getActiveMonthlyPlan(user: string) {
+    return this.prismaService.monthlyPlan.findFirstOrThrow({
+      where: {
+        user: user,
+        active: true,
+      },
+    });
+  }
+
+  public async _deductExpenseBudget(id: string, amount: number) {
+    await this.prismaService.monthlyPlan.update({
+      where: {
+        id: id,
+      },
+      data: {
+        remainingExpense: {
+          decrement: amount,
+        },
+      },
+    });
+  }
+
   async addMonthlyPlan(body: IMonthlyPlanBody) {
     //check if entered values are valid
     this._checkValidAmount(body);
 
     await this.prismaService.monthlyPlan.create({
-      data: body,
+      data: { ...body, remainingExpense: body.expenseBudget },
     });
     return {
       status: 'success',
@@ -24,11 +46,10 @@ export class FinanceService {
     this._checkValidAmount(body);
 
     //2)
-    const IsExpenseBudgetExceeded = await this._hasExpenseBudgetExceeded(
-      body.expenseBudget,
-    );
+    const currentMonthTotalExpenses =
+      await this._getCurrentMonthTotalExpenses();
 
-    if (IsExpenseBudgetExceeded) {
+    if (currentMonthTotalExpenses > body.expenseBudget) {
       throw new NotAcceptableException(
         `your expense budget is less than the amount you have spent till now on ${body.categories.join(
           ',',
@@ -55,6 +76,7 @@ export class FinanceService {
           savings: body.savings,
           investment: body.investment,
           expenseBudget: body.expenseBudget,
+          remainingExpense: body.expenseBudget - currentMonthTotalExpenses,
           categories: body.categories,
         },
       }),
@@ -85,7 +107,7 @@ export class FinanceService {
     }
   }
 
-  private async _hasExpenseBudgetExceeded(expenseBudget: number) {
+  private async _getCurrentMonthTotalExpenses() {
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth();
@@ -104,6 +126,7 @@ export class FinanceService {
       },
     });
 
-    return currentMonthTotalExpense > expenseBudget;
+    return currentMonthTotalExpense;
   }
+  //"rent","grocery","transportation","tiffin"
 }
