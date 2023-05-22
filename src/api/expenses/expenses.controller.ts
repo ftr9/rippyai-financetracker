@@ -26,4 +26,9 @@ export class ExpensesController {
   summarizeExpenses(@Query() query: expensesMetricQueryDto) {
     return this.expensesService.summarizeExpenses(query);
   }
+
+  @Get('/summarizeval')
+  summarizeVal() {
+    return this.expensesService.summarizeVal();
+  }
 }
