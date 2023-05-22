@@ -16,6 +16,8 @@ model Expenditures{
   user String 
   category String
   amount Int
+  expenseBudget Int
+  remainingExpense Int
   createdAt DateTime @default(now())
 }
 
@@ -28,7 +30,15 @@ model MonthlyPlan{
   savings Int
   investment Int
   expenseBudget Int
+  remainingExpense Int
   categories String[]
   createdAt DateTime @default(now())
   active Boolean @default(true)
+}
+
+model Reminder{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  user String @unique
+  expenseBudgetThreshold Int
+  loanReminder Json
 }
