@@ -1,4 +1,4 @@
-import { Button, Badge, Divider } from '@tremor/react';
+import { Button, Badge } from '@tremor/react';
 import AmountDisplayCard from '../../common/cards/AmountDisplayCard';
 import HeaderTitle from '../../common/typography/Header';
 

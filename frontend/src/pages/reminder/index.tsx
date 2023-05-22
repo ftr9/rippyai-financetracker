@@ -1,4 +1,3 @@
-import React from 'react';
 import HeaderTitle from '../../common/typography/Header';
 import SelectField from '../../common/Input/SelectField';
 import InputField from '../../common/Input/InputField';

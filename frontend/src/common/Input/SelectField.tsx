@@ -1,4 +1,3 @@
-import React from 'react';
 import { Text, Dropdown, DropdownItem } from '@tremor/react';
 
 interface ISelectFieldProps {
