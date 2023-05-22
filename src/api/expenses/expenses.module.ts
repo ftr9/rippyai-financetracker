@@ -3,9 +3,10 @@ import { ExpensesController } from './expenses.controller';
 import { ExpensesService } from './expenses.service';
 import { PrismaModule } from 'src/db/prisma/prisma.module';
 import checkAuth from 'middleware/checkAuth';
+import { FinanceModule } from '../finance/finance.module';
 
 @Module({
-  imports: [PrismaModule],
+  imports: [PrismaModule, FinanceModule],
   controllers: [ExpensesController],
   providers: [ExpensesService],
 })
