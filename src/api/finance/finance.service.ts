@@ -6,6 +6,7 @@ import { IMonthlyPlanBody } from './interfaces/MonthlyPlanBody.interface';
 export class FinanceService {
   constructor(private readonly prismaService: PrismaService) {}
 
+  /*
   async getActiveMonthlyPlan(user: string) {
     return this.prismaService.monthlyPlan.findFirstOrThrow({
       where: {
@@ -33,7 +34,7 @@ export class FinanceService {
     this._checkValidAmount(body);
 
     await this.prismaService.monthlyPlan.create({
-      data: { ...body, remainingExpense: body.expenseBudget },
+      data: { ...body, remainingExpense: body.expenseBudget, userId: 'ferlan' },
     });
     return {
       status: 'success',
@@ -71,7 +72,7 @@ export class FinanceService {
       //create new active monthly plan
       this.prismaService.monthlyPlan.create({
         data: {
-          user: body.user,
+          userId: 'ccdc',
           income: body.income,
           savings: body.savings,
           investment: body.investment,
@@ -129,4 +130,5 @@ export class FinanceService {
     return currentMonthTotalExpense;
   }
   //"rent","grocery","transportation","tiffin"
+  */
 }

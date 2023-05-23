@@ -10,22 +10,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  username String
+  email String @unique
+  password String
+  expenditures Expenditures[]
+  monthlyPlan MonthlyPlan[]
+  reminder Reminder? 
+}
 
 model Expenditures{
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  user String 
   category String
   amount Int
   expenseBudget Int
   remainingExpense Int
   createdAt DateTime @default(now())
+
+  userId String @db.ObjectId
+  user  User @relation(fields: [userId],references: [id])
 }
 
 
 
 model MonthlyPlan{
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  user String 
   income Int
   savings Int
   investment Int
@@ -34,11 +44,16 @@ model MonthlyPlan{
   categories String[]
   createdAt DateTime @default(now())
   active Boolean @default(true)
+
+  userId String @db.ObjectId
+  user User @relation(fields: [userId],references: [id])
 }
 
 model Reminder{
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  user String @unique
-  expenseBudgetThreshold Int
-  loanReminder Json
+  expenseBudgetThreshold Int?
+  loanReminder Json?
+
+  userId String @db.ObjectId @unique
+  user User @relation(fields: [userId],references: [id])
 }

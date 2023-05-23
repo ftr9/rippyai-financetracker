@@ -1,6 +1,6 @@
 export interface IMonthlyPlanBody {
   id?: string;
-  user: string;
+  userId: string;
   income: number;
   savings: number;
   investment: number;

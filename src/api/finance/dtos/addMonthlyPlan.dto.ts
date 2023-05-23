@@ -16,7 +16,7 @@ export class addMonthlyPlanDto {
 
   @IsNotEmpty()
   @IsString()
-  user: string;
+  userId: string;
 
   @IsNotEmpty()
   @IsNumber()

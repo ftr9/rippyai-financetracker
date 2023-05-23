@@ -12,6 +12,7 @@ export class ExpensesService {
     private readonly financeService: FinanceService,
   ) {}
 
+  /*
   private _filterExpenseQuery(query: IgetExpenseQuery) {
     const queryLimit = query.limit ? query.limit : 50;
     return {
@@ -96,4 +97,5 @@ export class ExpensesService {
       },
     });
   }
+*/
 }
