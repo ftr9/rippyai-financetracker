@@ -1,5 +1,6 @@
 import HomePageSectionOneImg from 'src/assets/homepage/hp-section-1.svg';
 import { Button, Text } from '@tremor/react';
+import React from 'react';
 
 const Home = () => {
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Text,
   DateRangePicker,
@@ -13,6 +13,9 @@ import {
   Button,
 } from '@tremor/react';
 import HeaderTitle from '../../common/typography/Header';
+import AddExpensePopup from '../../common/popup/AddExpensePopup';
+
+import { useExpensesStore } from '../../store/useExpensesStore';
 
 const Datas = [
   {
@@ -66,10 +69,16 @@ const Datas = [
 ];
 
 const Expenses = () => {
+  const { fetchExpenseList, isFetchingExpense } = useExpensesStore();
+  useEffect(() => {
+    fetchExpenseList();
+  }, []);
+
   return (
     <div>
-      <div className="my-5 mb-6">
+      <div className="flex justify-between items-center my-5 mb-6">
         <HeaderTitle title="My Expenses" size={24}></HeaderTitle>
+        <AddExpensePopup />
       </div>
 
       <div className="flex flex-row justify-end space-x-5">

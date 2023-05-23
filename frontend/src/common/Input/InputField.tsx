@@ -1,17 +1,33 @@
 import { TextInput, Text } from '@tremor/react';
-
+import React from 'react';
 
 interface IInputFieldProps {
   label: string;
   placeholder: string;
   value: string;
+  onValueChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: boolean;
+  errorMessage?: string;
 }
 
-const InputField = ({ label, placeholder, value }: IInputFieldProps) => {
+const InputField = ({
+  label,
+  placeholder,
+  value,
+  onValueChange,
+  error,
+  errorMessage,
+}: IInputFieldProps) => {
   return (
-    <div className="mb-5">
-      <Text className="mb-2">{label}</Text>
-      <TextInput value={value} placeholder={placeholder} />
+    <div className="mb-3">
+      <Text className="mb-1">{label}</Text>
+      <TextInput
+        onChange={onValueChange}
+        value={value}
+        placeholder={placeholder}
+        error={error}
+        errorMessage={errorMessage}
+      />
     </div>
   );
 };

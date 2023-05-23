@@ -1,7 +1,10 @@
 import React from 'react';
 import { Button, Text } from '@tremor/react';
+//@ts-ignore
 import TransparentLogoImg from 'src/assets/TransparentLogo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useUserStore } from '../../store/useUserStore';
+import { toast } from 'react-toastify';
 
 const NavBar = () => {
   return (
@@ -34,11 +37,39 @@ const NavBar = () => {
           </Link>
         </li>
         <li>
-          <Button>Sign In</Button>
+          <NavBar.CtaBtn />
         </li>
       </ul>
     </div>
   );
 };
+
+const CtaBtn = () => {
+  const { logout } = useUserStore();
+  const navigation = useNavigate();
+  const signUpPressHandle = () => {
+    navigation('/signup');
+  };
+  const signInPressHandle = () => {
+    navigation('/signin');
+  };
+  const signOutPressHandle = async () => {
+    await logout();
+    toast.success('Logged Out Successfully !!!');
+    navigation('/signin');
+  };
+  const location = useLocation();
+  if (location.pathname === '/signup') {
+    return <Button onClick={signInPressHandle}>Sign In</Button>;
+  } else if (location.pathname === '/signin') {
+    return <Button onClick={signUpPressHandle}>Sign Up</Button>;
+  } else if (location.pathname === '/') {
+    return <Button onClick={signUpPressHandle}>Sign Up</Button>;
+  } else {
+    return <Button onClick={signOutPressHandle}>Sign Out</Button>;
+  }
+};
+
+NavBar.CtaBtn = CtaBtn;
 
 export default NavBar;

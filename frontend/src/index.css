@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .authPageContainer {
+    @apply h-screen w-full flex justify-center items-center;
+  }
+  .authPageFormContainer {
+    @apply w-[450px] border-[1px] p-10 border-black rounded-md;
+  }
+}
