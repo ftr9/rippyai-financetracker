@@ -23,18 +23,20 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <Router>
-      <div className="px-20">
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/signin" element={<SignIN />}></Route>
-          <Route path="/signup" element={<SignUp />}></Route>
-          <Route path="/dashboard" element={<Dashboardpage />}></Route>
-          <Route path="/expenses" element={<ExpensePage />}></Route>
-          <Route path="/profile" element={<ProfilePage />}></Route>
-          <Route path="/reminder" element={<ReminderPage />}></Route>
-        </Routes>
-        <ToastContainer />
+      <div className=" px-2 md:px-10 xl:px-40">
+        <div className="mx-auto max-w-[1200px]">
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/signin" element={<SignIN />}></Route>
+            <Route path="/signup" element={<SignUp />}></Route>
+            <Route path="/dashboard" element={<Dashboardpage />}></Route>
+            <Route path="/expenses" element={<ExpensePage />}></Route>
+            <Route path="/profile" element={<ProfilePage />}></Route>
+            <Route path="/reminder" element={<ReminderPage />}></Route>
+          </Routes>
+          <ToastContainer />
+        </div>
       </div>
     </Router>
   );

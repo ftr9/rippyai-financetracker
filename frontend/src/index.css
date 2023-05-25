@@ -4,9 +4,9 @@
 
 @layer components {
   .authPageContainer {
-    @apply h-screen w-full flex justify-center items-center;
+    @apply h-[80vh] w-full flex justify-center items-center;
   }
   .authPageFormContainer {
-    @apply w-[450px] border-[1px] p-10 border-black rounded-md;
+    @apply md:w-[450px] w-[100%] border-[1px] p-5  md:p-10 border-[#D6336C] rounded-md;
   }
 }

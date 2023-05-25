@@ -77,8 +77,8 @@ const AddExpensePopup = () => {
         Add Expense
       </Button>
       {isPopUpVisible && (
-        <div className=" fixed top-0 left-0 z-50 h-screen w-screen bg-[rgba(28,126,214,0.5)] flex justify-center items-center">
-          <div className="w-[600px] p-10  bg-white rounded-md">
+        <div className="px-5 fixed top-0 left-0 z-50 h-screen w-screen bg-[rgba(28,126,214,0.5)] flex justify-center items-center">
+          <div className="md:w-[600px] w-full  p-5 md:p-10  bg-white rounded-md">
             <div className="mb-5 flex flex-row justify-between items-center ">
               <HeaderTitle title="Add Expenses" size={24} />
 

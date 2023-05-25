@@ -20,6 +20,7 @@ interface IAddExpense {
 interface IExpenseStore {
   isFetchingExpense: boolean;
   expensesList: IExpenseData[];
+  summarizedExpenses: ISummarizedCategory[];
   fetchExpenses: (
     category?: string,
     from?: string,
@@ -27,6 +28,14 @@ interface IExpenseStore {
     page?: number,
   ) => Promise<void>;
   addExpenses: (body: IAddExpense) => Promise<IExpenseData>;
+  fetchSummarizedExpense: () => Promise<void>;
+}
+
+interface ISummarizedCategory {
+  _sum: {
+    amount: number;
+  };
+  category: string;
 }
 
 export const useExpensesStore = create<
@@ -36,6 +45,7 @@ export const useExpensesStore = create<
   devtools((set) => ({
     isFetchingExpense: false,
     expensesList: [],
+    summarizedExpenses: [],
     fetchExpenses: async (category, from, to, page) => {
       const urlSearchParams = new URLSearchParams();
       if (category) {
@@ -60,6 +70,16 @@ export const useExpensesStore = create<
     },
     addExpenses: async (body: IAddExpense) => {
       return (await axios.post('/api/v1/expenses', body)).data;
+    },
+    fetchSummarizedExpense: async () => {
+      const summarizedCategories = await axios.get(
+        '/api/v1/expenses/summarize',
+      );
+
+      set((state) => ({
+        ...state,
+        summarizedExpenses: summarizedCategories.data,
+      }));
     },
   })),
 );

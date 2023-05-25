@@ -32,6 +32,7 @@ interface IMonthlyStore {
   saveMonthlyPlan: (body: IMonthlyPlanAdd) => Promise<void>;
   updateMonthlyPlan: (body: IMonthlyPlanAdd) => Promise<void>;
   updateRemainingExpense: (amount: number) => void;
+  resetMonthlyPlan: (body: IMonthlyPlanAdd) => Promise<void>;
   isFetchingMonthlyPlan: boolean;
 }
 
@@ -76,6 +77,13 @@ export const useMonthlyStore = create<
         }
         return newState;
       });
+    },
+    resetMonthlyPlan: async (body: IMonthlyPlanAdd) => {
+      const response = await axios.put('/api/v1/finance/reset', body);
+      set((state) => ({
+        ...state,
+        data: { payload: response.data, hasActiveMonthlyPlan: true },
+      }));
     },
     fetchMonthlyPlan: async () => {
       try {

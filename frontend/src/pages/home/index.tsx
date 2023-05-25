@@ -4,8 +4,8 @@ import React from 'react';
 
 const Home = () => {
   return (
-    <div className="flex flex-row items-center py-[50px]">
-      <div className="w-[50%]">
+    <div className="flex flex-col-reverse md:flex-row h-[80vh] items-center py-[50px]">
+      <div className=" md:w-[50%]">
         <Text className="text-black text-[36px] font-bold">
           TRACK TOUR EXPENSES
         </Text>
@@ -19,7 +19,7 @@ const Home = () => {
         </Text>
         <Button>Track My Expense</Button>
       </div>
-      <div className="w-[50%]">
+      <div className="w-[80%] mx-auto md:mx-0 md:w-[50%]">
         <img src={HomePageSectionOneImg} alt="homepagesectionone" />
       </div>
     </div>

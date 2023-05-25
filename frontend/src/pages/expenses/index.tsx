@@ -90,37 +90,33 @@ const Expenses = () => {
         <AddExpensePopup />
       </div>
 
-      <div className="flex flex-row justify-end space-x-5">
-        <>
-          <DateRangePicker
-            value={dateRangeValue}
-            onValueChange={onDateValueChanged}
-            className="w-[400px]"
-          />
-          {payload?.categories && (
-            <SelectBox
-              value={searchParams.category}
-              onValueChange={onOptionValueChanged}
-              className="w-[200px]"
-            >
-              {payload.categories.map((category) => (
-                <SelectBoxItem
-                  key={category}
-                  title={category}
-                  value={category}
-                />
-              ))}
-            </SelectBox>
-          )}
-          <Button
-            loading={isFetchingExpense}
-            onClick={searchBtnClickHandle}
-            icon={ViewfinderCircleIcon}
+      <div className="flex md:flex-row md:space-y-0 flex-col justify-end space-y-4 md:space-x-5">
+        <DateRangePicker
+          value={dateRangeValue}
+          onValueChange={onDateValueChanged}
+          className="w-[100%] md:w-[400px]"
+        />
+
+        {payload?.categories && (
+          <SelectBox
+            value={searchParams.category}
+            onValueChange={onOptionValueChanged}
+            className="w-[100%]  md:w-[200px]"
           >
-            {' '}
-            search{' '}
-          </Button>
-        </>
+            {payload.categories.map((category) => (
+              <SelectBoxItem key={category} title={category} value={category} />
+            ))}
+          </SelectBox>
+        )}
+        <Button
+          className="w-[100px] md:w-auto"
+          loading={isFetchingExpense}
+          onClick={searchBtnClickHandle}
+          icon={ViewfinderCircleIcon}
+        >
+          {' '}
+          search{' '}
+        </Button>
       </div>
 
       <Expenses.TableDataDisplay />
