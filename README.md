@@ -15,9 +15,11 @@ _Technology stack used_
 - Tailwind css
 - Prisma orm
 - mongodb database
+- Typescript (for both frontend + backend)
 
 _Libraries and tools_
 
+- Zustand (for state management)
 - SendInBlue (for sending emails)
 - jsonwebtokn (for authentication and authorization)
 - @tremor (ui library for building dashboard quickly)
