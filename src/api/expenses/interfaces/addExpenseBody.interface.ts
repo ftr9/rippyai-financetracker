@@ -1,5 +1,5 @@
 export interface IaddExpenseBody {
-  user: string;
+  userId: string;
   category: string;
   amount: number;
 }

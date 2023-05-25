@@ -12,35 +12,67 @@ export class ExpensesService {
     private readonly financeService: FinanceService,
   ) {}
 
-  /*
-  private _filterExpenseQuery(query: IgetExpenseQuery) {
-    const queryLimit = query.limit ? query.limit : 50;
+  private makeQueryForSingleDate = (date: string) => {
+    if (!date) {
+      return {
+        gte: undefined,
+        lte: undefined,
+      };
+    }
+    const startTime = new Date(date);
+    startTime.setHours(0, 0, 0, 0);
+
+    const endTime = new Date(date);
+    endTime.setHours(23, 59, 59, 999);
+    //console.log(startTime.toISOString(), endTime.toISOString());
+    //console.log(startTime, endTime);
     return {
-      where: {
-        category: query.category
-          ? { in: query.category.split(',') }
-          : undefined,
-        createdAt: {
-          gte: query.from,
-          lte: query.to,
-        },
-      },
-      skip: query.page ? (query.page - 1) * queryLimit : 0,
-      take: queryLimit,
+      gte: startTime,
+      lte: endTime,
+    };
+  };
+
+  private makeQueryForMultipleDate(from: string, to: string) {
+    const startDate = new Date(from);
+    startDate.setDate(startDate.getDate() - 1);
+    const endDate = new Date(to);
+    endDate.setDate(endDate.getDate() + 1);
+    return {
+      gte: startDate,
+      lte: endDate,
     };
   }
 
   async getAllExpenses(query: IgetExpenseQuery) {
-    const allExpenditures = await this.prismaService.expenditures.findMany(
-      this._filterExpenseQuery(query),
-    );
+    const queryLimit = query.limit ? query.limit : 10;
+    const isDateEqual = query.from === query.to;
+    const isSingleDate = query.from && !query.to;
+    const createdAtProp =
+      isDateEqual || isSingleDate
+        ? this.makeQueryForSingleDate(query.from)
+        : this.makeQueryForMultipleDate(query.from, query.to);
+
+    //console.log(new Date(query.from).toLocaleDateString());
+    const allExpenditures = await this.prismaService.expenditures.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+      where: {
+        userId: query.userId,
+        category: query.category,
+        createdAt: createdAtProp,
+      },
+      skip: query.page ? (query.page - 1) * queryLimit : 0,
+      take: queryLimit,
+    });
+
     return allExpenditures;
   }
 
   async addExpense(body: IaddExpenseBody) {
     //1)
     const activeMonthlyPlan = await this.financeService.getActiveMonthlyPlan(
-      body.user,
+      body.userId,
     );
 
     //2)
@@ -54,6 +86,7 @@ export class ExpensesService {
       activeMonthlyPlan.id,
       body.amount,
     );
+
     const createdExpense = await this.prismaService.expenditures.create({
       data: {
         ...body,
@@ -62,7 +95,7 @@ export class ExpensesService {
       },
     });
 
-    //3)
+    //3)check for threshold
     const expenseLimitThreshold =
       (createdExpense.remainingExpense / createdExpense.expenseBudget) * 100;
     if (expenseLimitThreshold <= 20) {
@@ -97,5 +130,4 @@ export class ExpensesService {
       },
     });
   }
-*/
 }

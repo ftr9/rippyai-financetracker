@@ -42,7 +42,7 @@ model MonthlyPlan{
   expenseBudget Int
   remainingExpense Int
   categories String[]
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @db.Timestamp
   active Boolean @default(true)
 
   userId String @db.ObjectId
@@ -51,9 +51,10 @@ model MonthlyPlan{
 
 model Reminder{
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  expenseBudgetThreshold Int?
-  loanReminder Json?
-
+  borrowerName String
+  amount Int
+  purpose String
+  dateValue String[]
   userId String @db.ObjectId @unique
   user User @relation(fields: [userId],references: [id])
 }

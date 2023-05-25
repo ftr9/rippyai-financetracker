@@ -8,9 +8,10 @@ import { FinanceModule } from './api/finance/finance.module';
 import { JwtService } from './utils/jwt/jwt.service';
 
 //import { APP_GUARD } from '@nestjs/core';
+import { ReminderModule } from './api/reminder/reminder.module';
 
 @Module({
-  imports: [ExpensesModule, PrismaModule, AuthModule, FinanceModule],
+  imports: [ExpensesModule, PrismaModule, AuthModule, FinanceModule, ReminderModule],
   controllers: [AppController],
   providers: [AppService, JwtService],
 })

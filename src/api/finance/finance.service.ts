@@ -6,11 +6,10 @@ import { IMonthlyPlanBody } from './interfaces/MonthlyPlanBody.interface';
 export class FinanceService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  /*
-  async getActiveMonthlyPlan(user: string) {
-    return this.prismaService.monthlyPlan.findFirstOrThrow({
+  async getActiveMonthlyPlan(userId: string) {
+    return this.prismaService.monthlyPlan.findFirst({
       where: {
-        user: user,
+        userId: userId,
         active: true,
       },
     });
@@ -31,14 +30,28 @@ export class FinanceService {
 
   async addMonthlyPlan(body: IMonthlyPlanBody) {
     //check if entered values are valid
+
+    const existingMonthlyPlan = await this.getActiveMonthlyPlan(body.userId);
+
+    if (existingMonthlyPlan) {
+      throw new NotAcceptableException(
+        'you have active monthly plan already created.',
+      );
+    }
+
     this._checkValidAmount(body);
 
-    await this.prismaService.monthlyPlan.create({
-      data: { ...body, remainingExpense: body.expenseBudget, userId: 'ferlan' },
+    const monthlyPlan = await this.prismaService.monthlyPlan.create({
+      data: {
+        ...body,
+        remainingExpense: body.expenseBudget,
+      },
     });
+
     return {
       status: 'success',
       message: 'Monthly plan added successfully',
+      payload: monthlyPlan,
     };
   }
 
@@ -72,7 +85,7 @@ export class FinanceService {
       //create new active monthly plan
       this.prismaService.monthlyPlan.create({
         data: {
-          userId: 'ccdc',
+          userId: body.userId,
           income: body.income,
           savings: body.savings,
           investment: body.investment,
@@ -130,5 +143,4 @@ export class FinanceService {
     return currentMonthTotalExpense;
   }
   //"rent","grocery","transportation","tiffin"
-  */
 }

@@ -4,5 +4,5 @@ export interface IgetExpenseQuery {
   to?: string;
   page?: number;
   limit?: number;
-  user?: Record<string, any>;
+  userId: string;
 }

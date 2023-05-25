@@ -6,6 +6,7 @@ import {
   IsPositive,
   ArrayMinSize,
   IsOptional,
+  Min,
 } from 'class-validator';
 
 export class addMonthlyPlanDto {
@@ -15,27 +16,23 @@ export class addMonthlyPlanDto {
   id: string;
 
   @IsNotEmpty()
-  @IsString()
-  userId: string;
-
-  @IsNotEmpty()
   @IsNumber()
   @IsPositive()
   income: number;
 
   @IsNotEmpty()
   @IsNumber()
-  @IsPositive()
+  @Min(0)
   savings: number;
 
   @IsNotEmpty()
   @IsNumber()
-  @IsPositive()
+  @Min(0)
   investment: number;
 
   @IsNotEmpty()
   @IsNumber()
-  @IsPositive()
+  @Min(0)
   expenseBudget: number;
 
   @IsNotEmpty()
