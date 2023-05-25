@@ -99,6 +99,19 @@ export class FinanceService {
     return data[1];
   }
 
+  async resetMonthlyPlan(body: IMonthlyPlanBody) {
+    const data = this.prismaService.monthlyPlan.update({
+      where: {
+        id: body.id,
+      },
+      data: {
+        createdAt: new Date().toISOString(),
+        remainingExpense: body.expenseBudget,
+      },
+    });
+    return data;
+  }
+
   private _checkValidAmount(body: IMonthlyPlanBody) {
     if (body.income < body.expenseBudget) {
       throw new NotAcceptableException(

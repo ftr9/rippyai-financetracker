@@ -35,15 +35,11 @@ export class ExpensesController {
     );
   }
 
-  /*
   @Get('/summarize')
-  summarizeExpenses(@Query() query: expensesMetricQueryDto) {
-    return this.expensesService.summarizeExpenses(query);
+  summarizeExpenses(
+    @Query() query: expensesMetricQueryDto,
+    @Req() req: Request,
+  ) {
+    return this.expensesService.summarizeExpenses(query, req.user.id);
   }
-
-  @Get('/summarizeval')
-  summarizeVal() {
-    return this.expensesService.summarizeVal();
-  }
-  */
 }

@@ -118,24 +118,16 @@ export class ExpensesService {
     return createdExpense;
   }
 
-  async summarizeExpenses(query: IexpensesMetricQuery) {
+  async summarizeExpenses(query: IexpensesMetricQuery, userId: string) {
     return await this.prismaService.expenditures.groupBy({
       by: ['category'],
       where: {
+        userId: userId,
         createdAt: {
           gte: query.from,
           lte: query.to,
         },
       },
-      _sum: {
-        amount: true,
-      },
-    });
-  }
-
-  async summarizeVal() {
-    return await this.prismaService.expenditures.groupBy({
-      by: ['createdAt'],
       _sum: {
         amount: true,
       },

@@ -33,6 +33,14 @@ export class FinanceController {
   addMonthlyPlan(@Body() body: addMonthlyPlanDto, @Req() req: Request) {
     return this.financeService.addMonthlyPlan({ ...body, userId: req.user.id });
   }
+  @Put('reset')
+  resetMonthlyPlan(@Body() body: addMonthlyPlanDto, @Req() req: Request) {
+    return this.financeService.resetMonthlyPlan({
+      ...body,
+      userId: req.user.id,
+    });
+  }
+
   @Put('monthlyplan')
   modifyAndAddMonthlyPlan(
     @Body() body: addMonthlyPlanDto,
