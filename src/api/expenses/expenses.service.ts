@@ -4,6 +4,9 @@ import { IaddExpenseBody } from './interfaces/addExpenseBody.interface';
 import { IgetExpenseQuery } from './interfaces/getExpenseQuery.interface';
 import { IexpensesMetricQuery } from './interfaces/expensesMetricQuery.interface';
 import { FinanceService } from '../finance/finance.service';
+import { EmailService } from 'src/utils/email/Email.service';
+import { User } from '@prisma/client';
+import getBudgetThresholdMailBody from 'src/utils/email/getBudgetThresholdMailBody';
 
 @Injectable()
 export class ExpensesService {
@@ -69,7 +72,7 @@ export class ExpensesService {
     return allExpenditures;
   }
 
-  async addExpense(body: IaddExpenseBody) {
+  async addExpense(body: IaddExpenseBody, user: User) {
     //1)
     const activeMonthlyPlan = await this.financeService.getActiveMonthlyPlan(
       body.userId,
@@ -99,9 +102,17 @@ export class ExpensesService {
     const expenseLimitThreshold =
       (createdExpense.remainingExpense / createdExpense.expenseBudget) * 100;
     if (expenseLimitThreshold <= 20) {
-      console.log(
-        `you have spent ${100 - expenseLimitThreshold}% of your expenses`,
+      const emailService = new EmailService(
+        user.email,
+        user.username,
+        'Budget Spending Alert !!!',
+        getBudgetThresholdMailBody({
+          message: `You have spent ${
+            100 - expenseLimitThreshold
+          }% of your total expense`,
+        }),
       );
+      await emailService.sendMail();
     }
 
     return createdExpense;

@@ -29,7 +29,10 @@ export class ExpensesController {
 
   @Post('/')
   addExpense(@Body() body: addExpenseDto, @Req() req: Request) {
-    return this.expensesService.addExpense({ ...body, userId: req.user.id });
+    return this.expensesService.addExpense(
+      { ...body, userId: req.user.id },
+      req.user,
+    );
   }
 
   /*

@@ -6,13 +6,20 @@ import { PrismaModule } from './db/prisma/prisma.module';
 import { AuthModule } from './api/auth/auth.module';
 import { FinanceModule } from './api/finance/finance.module';
 import { JwtService } from './utils/jwt/jwt.service';
-
-//import { APP_GUARD } from '@nestjs/core';
 import { ReminderModule } from './api/reminder/reminder.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { LoanReminderTask } from './notification/LoanReminder.notification';
 
 @Module({
-  imports: [ExpensesModule, PrismaModule, AuthModule, FinanceModule, ReminderModule],
+  imports: [
+    ScheduleModule.forRoot(),
+    ExpensesModule,
+    PrismaModule,
+    AuthModule,
+    FinanceModule,
+    ReminderModule,
+  ],
   controllers: [AppController],
-  providers: [AppService, JwtService],
+  providers: [AppService, JwtService, LoanReminderTask],
 })
 export class AppModule {}
