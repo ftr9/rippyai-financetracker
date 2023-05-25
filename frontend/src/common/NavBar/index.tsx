@@ -57,7 +57,7 @@ const NavBar = () => {
       <div className="md:hidden">
         <ul
           className={`space-y-4 overflow-hidden ${
-            isMenuOpen ? 'h-[220px]' : 'h-[0px]'
+            isMenuOpen ? 'h-[230px]' : 'h-[0px]'
           } transition-all duration-200 ease-in px-3`}
         >
           <li>
