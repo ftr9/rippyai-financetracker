@@ -90,6 +90,7 @@ const SignUp = () => {
           label="Password"
           error={hasInputErr.password}
           errorMessage={inputErrMsg.password}
+          type="password"
         />
         <Button
           className="mt-3 mb-2"

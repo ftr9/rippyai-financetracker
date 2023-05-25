@@ -72,6 +72,7 @@ const SignIN = () => {
             setInputValue((state) => ({ ...state, password: e.target.value }));
           }}
           placeholder="Enter password"
+          type="password"
           value={inputValue.password}
           label="Password"
           error={hasInputErr.password}

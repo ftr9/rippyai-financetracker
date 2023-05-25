@@ -8,6 +8,7 @@ interface IInputFieldProps {
   onValueChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: boolean;
   errorMessage?: string;
+  type?: 'password' | 'text' | undefined;
 }
 
 const InputField = ({
@@ -16,12 +17,14 @@ const InputField = ({
   value,
   onValueChange,
   error,
+  type,
   errorMessage,
 }: IInputFieldProps) => {
   return (
     <div className="mb-3">
       <Text className="mb-1">{label}</Text>
       <TextInput
+        type={type}
         onChange={onValueChange}
         value={value}
         placeholder={placeholder}
