@@ -46,8 +46,8 @@ _Technology stack used_
 _Libraries and tools_
 
 - Zustand (for state management)
-- SendInBlue (for sending emails)
-- jsonwebtokn (for authentication and authorization)
+- SendInBlue api (for sending emails)
+- jsonwebtoken (for jwt authentication and authorization)
 - @tremor (ui library for building dashboard quickly)
 - moment.js (for formatting date and time properly)
 
