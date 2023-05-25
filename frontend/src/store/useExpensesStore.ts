@@ -12,11 +12,21 @@ interface IExpenseData {
   createdAt: string;
 }
 
+interface IAddExpense {
+  amount: number;
+  category: string;
+}
+
 interface IExpenseStore {
   isFetchingExpense: boolean;
-  fetchingExpenseErr: boolean;
   expensesList: IExpenseData[];
-  fetchExpenseList: () => Promise<void>;
+  fetchExpenses: (
+    category?: string,
+    from?: string,
+    to?: string,
+    page?: number,
+  ) => Promise<void>;
+  addExpenses: (body: IAddExpense) => Promise<IExpenseData>;
 }
 
 export const useExpensesStore = create<
@@ -25,21 +35,31 @@ export const useExpensesStore = create<
 >(
   devtools((set) => ({
     isFetchingExpense: false,
-    fetchingExpenseErr: false,
     expensesList: [],
-    async fetchExpenseList() {
-      //1) set Loading
-
+    fetchExpenses: async (category, from, to, page) => {
+      const urlSearchParams = new URLSearchParams();
+      if (category) {
+        urlSearchParams.append('category', category);
+      }
+      if (from) {
+        urlSearchParams.append('from', from);
+      }
+      if (to) {
+        urlSearchParams.append('to', to);
+      }
+      if (page) {
+        urlSearchParams.append('page', `${page}`);
+      }
       set((state) => ({ ...state, isFetchingExpense: true }));
-      //2) fetch
-      const expensesLists = await axios.get(`/api/v1`);
-      console.log(expensesLists.data);
-      //3) update
-      set((state) => ({
-        ...state,
-        isFetchingExpense: false,
-        expensesList: expensesLists.data,
-      }));
+
+      const expenses = await axios.get(
+        `/api/v1/expenses?${urlSearchParams.toString()}`,
+      );
+      set((state) => ({ ...state, expensesList: expenses.data }));
+      set((state) => ({ ...state, isFetchingExpense: false }));
+    },
+    addExpenses: async (body: IAddExpense) => {
+      return (await axios.post('/api/v1/expenses', body)).data;
     },
   })),
 );

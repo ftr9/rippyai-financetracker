@@ -7,6 +7,7 @@ export function AuthHoc<P extends {}>(Page: React.ComponentType<P>) {
     const navigate = useNavigate();
 
     const { checkIfAlreadyLogged, isCheckingAuthStatus, user } = useUserStore();
+
     useEffect(() => {
       const checkAuthStatus = async () => {
         try {
@@ -20,10 +21,9 @@ export function AuthHoc<P extends {}>(Page: React.ComponentType<P>) {
       }
     }, []);
 
-    if (isCheckingAuthStatus) {
+    if (isCheckingAuthStatus || !user) {
       return <div>Loading...</div>;
     }
-
     return <Page {...props} />;
   };
   return AuthProtectedPage;
