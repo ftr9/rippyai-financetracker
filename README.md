@@ -4,16 +4,16 @@
 
 #### Phone
 
-![mob2](https://github.com/ftr9/rippyai-financetracker/assets/60734475/f559f920-ff95-4241-95e9-8086598568ed)
-![mob3](https://github.com/ftr9/rippyai-financetracker/assets/60734475/46763184-881c-4ed9-972b-48c0af4d4a87)
-![mob3](https://github.com/ftr9/rippyai-financetracker/assets/60734475/c4bfcd9d-5e8d-47c2-af23-dfe6abe26e67)
-![mob4](https://github.com/ftr9/rippyai-financetracker/assets/60734475/db649472-8471-4ce3-ac75-1318baadc8d1)
+![mob1](https://github.com/ftr9/rippyai-financetracker/assets/60734475/de3df54f-a8ac-4c8c-9406-f833bc3ecb31)
+![mob2](https://github.com/ftr9/rippyai-financetracker/assets/60734475/b7af1637-60c1-4070-a9de-c0ed81459d34)
+![mob3](https://github.com/ftr9/rippyai-financetracker/assets/60734475/e22faa53-0b99-4ad3-ae65-e658a353d25c)
+![mob4](https://github.com/ftr9/rippyai-financetracker/assets/60734475/fa5970ea-86f8-4039-9451-33f20fec5fa2)
 
 #### Desktop
 
-![one](https://github.com/ftr9/rippyai-financetracker/assets/60734475/b250e561-f950-4d23-9819-6f3b2d66c464)
-![two](https://github.com/ftr9/rippyai-financetracker/assets/60734475/c8ec60bc-765b-42fe-ab4e-9865be191e4e)
-![third](https://github.com/ftr9/rippyai-financetracker/assets/60734475/9ea0bdc6-f147-4a9b-9199-e2db0ac92018)
+![first](https://github.com/ftr9/rippyai-financetracker/assets/60734475/a33fb173-417f-4b8f-b337-6f296e514cad)
+![two](https://github.com/ftr9/rippyai-financetracker/assets/60734475/4021cb9c-362c-4eb9-829e-b0ddac520ef8)
+![third](https://github.com/ftr9/rippyai-financetracker/assets/60734475/b0806543-1652-4c90-965f-e1bebaf166e7)
 
 ### FEATURES DONE
 
