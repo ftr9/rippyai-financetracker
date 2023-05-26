@@ -29,6 +29,10 @@
 
 - [ ] Able to export reports in desired format. You can give any number of formats like pdf, xlsx, csv. (Optional)
 
+### Others
+
+- [ ] little bit of code clean up and refactoring left
+
 _Deployment_
 
 - Railway App
