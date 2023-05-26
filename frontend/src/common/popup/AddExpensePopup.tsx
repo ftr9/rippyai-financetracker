@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Text } from '@tremor/react';
+import { Button } from '@tremor/react';
 import InputField from '../Input/InputField';
 import SelectField from '../Input/SelectField';
 import HeaderTitle from '../typography/Header';

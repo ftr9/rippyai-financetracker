@@ -40,7 +40,7 @@ export const useMonthlyStore = create<
   IMonthlyStore,
   [['zustand/devtools', never]]
 >(
-  devtools((set, get) => ({
+  devtools((set) => ({
     isFetchingMonthlyPlan: false,
     data: {
       hasActiveMonthlyPlan: null,

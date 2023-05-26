@@ -13,11 +13,11 @@ import { loginUserDto } from './dtos/loginUser.dtos';
 import { registerUserDto } from './dtos/registerUser.dto';
 import { AuthGuard } from 'src/common/guards/Auth.guard';
 
-@Controller('auth')
+@Controller('/auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('login')
+  @Post('/login')
   login(@Body() body: loginUserDto, @Res() res: Response) {
     return this.authService.login(body, res);
   }

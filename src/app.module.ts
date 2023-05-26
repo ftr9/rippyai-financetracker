@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+
 import { ExpensesModule } from './api/expenses/expenses.module';
 import { PrismaModule } from './db/prisma/prisma.module';
 import { AuthModule } from './api/auth/auth.module';
@@ -9,9 +8,14 @@ import { JwtService } from './utils/jwt/jwt.service';
 import { ReminderModule } from './api/reminder/reminder.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { LoanReminderTask } from './notification/LoanReminder.notification';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '..', 'frontend', 'dist'),
+    }),
     ScheduleModule.forRoot(),
     ExpensesModule,
     PrismaModule,
@@ -19,7 +23,7 @@ import { LoanReminderTask } from './notification/LoanReminder.notification';
     FinanceModule,
     ReminderModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, JwtService, LoanReminderTask],
+  controllers: [],
+  providers: [JwtService, LoanReminderTask],
 })
 export class AppModule {}
