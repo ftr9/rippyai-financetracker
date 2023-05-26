@@ -112,7 +112,11 @@ export class ExpensesService {
           }% of your total expense`,
         }),
       );
-      await emailService.sendMail();
+      try {
+        await emailService.sendMail();
+      } catch (err) {
+        console.log('Failed to send email');
+      }
     }
 
     return createdExpense;
