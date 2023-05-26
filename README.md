@@ -4,7 +4,6 @@
 
 #### Phone
 
-![mob1](https://github.com/ftr9/rippyai-financetracker/assets/60734475/67631bc7-b780-476b-a113-76333c2dd627)
 ![mob2](https://github.com/ftr9/rippyai-financetracker/assets/60734475/f559f920-ff95-4241-95e9-8086598568ed)
 ![mob3](https://github.com/ftr9/rippyai-financetracker/assets/60734475/46763184-881c-4ed9-972b-48c0af4d4a87)
 ![mob3](https://github.com/ftr9/rippyai-financetracker/assets/60734475/c4bfcd9d-5e8d-47c2-af23-dfe6abe26e67)
